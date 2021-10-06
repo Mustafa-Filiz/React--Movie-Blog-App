@@ -7,6 +7,8 @@ const FEATURED_API =
 
 const SEARCH_API =
     'https://api.themoviedb.org/3/search/movie?api_key=c5fd6eb749e7402b687b8c200a3472c7&query=';
+ 
+
 
 export const SearchContext = createContext();
 
