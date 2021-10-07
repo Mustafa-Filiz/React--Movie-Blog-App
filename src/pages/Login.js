@@ -23,10 +23,10 @@ const useStyles = makeStyles({
         maxWidth: '100%',
         height: '91vh',
         display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
     },
     loginFormContainer: {
-        width: 400,
+        width: 450,
         padding: 50,
         display: 'flex',
         flexDirection: 'column',
