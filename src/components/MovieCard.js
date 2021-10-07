@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     cardComp : {
         height : 410,
         width : 250,
-
+        backgroundColor : "primary"
     },
 })
 
@@ -28,7 +28,7 @@ const MovieCard = ({ movie }) => {
                 height="350"
                 image={IMG_URL + movie.poster_path}
             />
-            <CardHeader title={movie.title} titleTypographyProps={{fontSize : 16}} />
+            <CardHeader title={movie.title} titleTypographyProps={{fontSize : 16, fontWeight: 600}} />
         </Card>
     );
 };
