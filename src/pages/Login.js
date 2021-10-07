@@ -43,7 +43,7 @@ const Login = () => {
 
     return (
         <Container className={classes.loginPage}>
-            <Paper className={classes.loginFormContainer}>
+            <Paper className={classes.loginFormContainer} elevation={10}>
                 <Typography variant="h2" mb={8}>
                     Login
                 </Typography>
