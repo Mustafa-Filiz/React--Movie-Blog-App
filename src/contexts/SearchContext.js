@@ -2,10 +2,10 @@ import { createContext, useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import { AuthContext } from "./AuthContext";
 
-const FEATURED_API =
+const FEATURED_URL =
     'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=c5fd6eb749e7402b687b8c200a3472c7';
 
-const SEARCH_API =
+const SEARCH_URL =
     'https://api.themoviedb.org/3/search/movie?api_key=c5fd6eb749e7402b687b8c200a3472c7&query=';
  
 
@@ -22,7 +22,7 @@ function SearchContextProvider ({children}) {
     };
 
     useEffect(() => {
-        getMovies(FEATURED_API);
+        getMovies(FEATURED_URL);
     }, []);
 
     const handleChange = (e) => {
@@ -33,7 +33,7 @@ function SearchContextProvider ({children}) {
         e.preventDefault();
 
         if (searchTerm && currentUser) {
-            getMovies(SEARCH_API + searchTerm);
+            getMovies(SEARCH_URL + searchTerm);
             setSearchTerm('');
         } else {
             alert('Please login to search a movie.');
