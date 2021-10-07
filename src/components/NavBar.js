@@ -12,14 +12,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
-
-// const useStyles = makeStyles({
-//     link: {
-//         textDecoration: 'none',
-//         color: 'white',
-//     },
-// });
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -62,7 +54,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar() {
-    // const classes = useStyles();
 
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
