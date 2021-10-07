@@ -11,6 +11,15 @@ import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
+
+// const useStyles = makeStyles({
+//     link: {
+//         textDecoration: 'none',
+//         color: 'white',
+//     },
+// });
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -52,7 +61,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function NavBar() {
+    // const classes = useStyles();
+
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -64,7 +75,6 @@ export default function PrimarySearchAppBar() {
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
-
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
@@ -84,10 +94,20 @@ export default function PrimarySearchAppBar() {
             onClose={handleMobileMenuClose}
         >
             <MenuItem>
-                <Button color="inherit">Login</Button>
+                <Link
+                    style={{ color: 'black', textDecoration: 'none' }}
+                    to="/login"
+                >
+                    <Button color="inherit">Login</Button>
+                </Link>
             </MenuItem>
             <MenuItem>
-                <Button color="inherit">Register</Button>
+                <Link
+                    style={{ color: 'black', textDecoration: 'none' }}
+                    to="/register"
+                >
+                    <Button color="inherit">Register</Button>
+                </Link>
             </MenuItem>
         </Menu>
     );
@@ -102,8 +122,14 @@ export default function PrimarySearchAppBar() {
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block' } }}
                     >
-                        Movie Blog
+                        <Link
+                            style={{ color: 'white', textDecoration: 'none' }}
+                            to="/"
+                        >
+                            Movie Blog
+                        </Link>
                     </Typography>
+
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
@@ -115,8 +141,18 @@ export default function PrimarySearchAppBar() {
                     </Search>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <Button color="inherit">Login</Button>
-                        <Button color="inherit">Register</Button>
+                        <Link
+                            style={{ color: 'white', textDecoration: 'none' }}
+                            to="/login"
+                        >
+                            <Button color="inherit">Login</Button>
+                        </Link>
+                        <Link
+                            style={{ color: 'white', textDecoration: 'none' }}
+                            to="/register"
+                        >
+                            <Button color="inherit">Register</Button>
+                        </Link>
                     </Box>
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
