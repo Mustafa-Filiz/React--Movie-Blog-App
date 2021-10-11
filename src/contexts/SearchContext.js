@@ -30,7 +30,7 @@ function SearchContextProvider({ children }) {
     const handleSearch = (e) => {
         e.preventDefault();
 
-        if (searchTerm && currentUser) {
+        if (searchTerm ) {
             getMovies(SEARCH_URL + searchTerm);
             setSearchTerm('');
         } else {
