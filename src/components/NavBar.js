@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext, useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,8 +12,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import { SearchContext } from '../contexts/SearchContext';
 
-const Search = styled('div')(({ theme }) => ({
+const Search = styled('form')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -54,8 +55,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar() {
+    const { movies, searchTerm, handleChange, handleSearch } =
+        useContext(SearchContext);
 
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -121,13 +124,15 @@ export default function NavBar() {
                         </Link>
                     </Typography>
 
-                    <Search>
+                    <Search onSubmit={handleSearch}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
                         <StyledInputBase
+                            onChange={handleChange}
                             placeholder="Search…"
                             inputProps={{ 'aria-label': 'search' }}
+                            value={searchTerm}
                         />
                     </Search>
                     <Box sx={{ flexGrow: 1 }} />
