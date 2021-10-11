@@ -79,12 +79,6 @@ const Login = () => {
                     <IconButton size="large">
                         <GoogleIcon fontSize="large" />
                     </IconButton>
-                    <IconButton size="large">
-                        <GitHubIcon fontSize="large" />
-                    </IconButton>
-                    <IconButton size="large">
-                        <FacebookIcon fontSize="large" />
-                    </IconButton>
                 </Box>
             </Paper>
         </Container>
