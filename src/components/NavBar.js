@@ -13,6 +13,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { SearchContext } from '../contexts/SearchContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Search = styled('form')(({ theme }) => ({
     position: 'relative',
@@ -58,6 +59,8 @@ export default function NavBar() {
     const { movies, searchTerm, handleChange, handleSearch } =
         useContext(SearchContext);
 
+    const { currentUser } = useContext(AuthContext);
+
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -88,20 +91,35 @@ export default function NavBar() {
             onClose={handleMobileMenuClose}
         >
             <MenuItem>
-                <Link
-                    style={{ color: 'black', textDecoration: 'none' }}
-                    to="/login"
-                >
-                    <Button color="inherit">Login</Button>
-                </Link>
+                {currentUser ? (
+                    <Button color="inherit">
+                        {currentUser.displayName}
+                    </Button>
+                ) : (
+                    <Link
+                        style={{ color: 'black', textDecoration: 'none' }}
+                        to="/login"
+                    >
+                        <Button color="inherit">Login</Button>
+                    </Link>
+                )}
             </MenuItem>
             <MenuItem>
-                <Link
-                    style={{ color: 'black', textDecoration: 'none' }}
-                    to="/register"
-                >
-                    <Button color="inherit">Register</Button>
-                </Link>
+                {currentUser ? (
+                    <Link
+                        style={{ color: 'black', textDecoration: 'none' }}
+                        to="/"
+                    >
+                        <Button color="inherit">Logout</Button>
+                    </Link>
+                ) : (
+                    <Link
+                        style={{ color: 'black', textDecoration: 'none' }}
+                        to="/register"
+                    >
+                        <Button color="inherit">Register</Button>
+                    </Link>
+                )}
             </MenuItem>
         </Menu>
     );
@@ -137,18 +155,42 @@ export default function NavBar() {
                     </Search>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <Link
-                            style={{ color: 'white', textDecoration: 'none' }}
-                            to="/login"
-                        >
-                            <Button color="inherit">Login</Button>
-                        </Link>
-                        <Link
-                            style={{ color: 'white', textDecoration: 'none' }}
-                            to="/register"
-                        >
-                            <Button color="inherit">Register</Button>
-                        </Link>
+                        {currentUser ? (
+                            <Button color="inherit">
+                                {currentUser.displayName}
+                            </Button>
+                        ) : (
+                            <Link
+                                style={{
+                                    color: 'white',
+                                    textDecoration: 'none',
+                                }}
+                                to="/login"
+                            >
+                                <Button color="inherit">Login</Button>
+                            </Link>
+                        )}
+                        {currentUser ? (
+                            <Link
+                                style={{
+                                    color: 'white',
+                                    textDecoration: 'none',
+                                }}
+                                to="/"
+                            >
+                                <Button color="inherit">Logout</Button>
+                            </Link>
+                        ) : (
+                            <Link
+                                style={{
+                                    color: 'white',
+                                    textDecoration: 'none',
+                                }}
+                                to="/register"
+                            >
+                                <Button color="inherit">Register</Button>
+                            </Link>
+                        )}
                     </Box>
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
