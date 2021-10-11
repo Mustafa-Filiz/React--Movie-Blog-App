@@ -42,7 +42,7 @@ const Main = () => {
         >
             {movies?.map((movie) => {
                 return (
-                    <Grid item>
+                    <Grid item key={movie.id} >
                         <MovieCard movie={movie} />
                     </Grid>
                 );
