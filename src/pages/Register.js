@@ -11,7 +11,9 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
+import { createUser } from '../auth/Firebase';
 
 const useStyles = makeStyles({
     loginPage: {
@@ -33,11 +35,11 @@ const useStyles = makeStyles({
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
-	nameContainer:{
-		display: 'flex',
-		justifyContent : "space-between",
-		alignItems: "center"
-	},
+    nameContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
     btn: {
         marginTop: 20,
     },
@@ -46,13 +48,30 @@ const useStyles = makeStyles({
 const Register = () => {
     const classes = useStyles();
 
+    const [name, setName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const history = useHistory()
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        const displayName = `${name} ${lastName}`.toUpperCase();
+        createUser(email, password, displayName);
+        history.push("/")
+        // setName('');
+        // setLastName('');
+        // setEmail('');
+        // setPassword('');
+    };
+
     return (
         <Container className={classes.loginPage}>
             <Paper className={classes.loginFormContainer} elevation={10}>
                 <Typography variant="h2" mb={4}>
                     Register
                 </Typography>
-                <form>
+                <form onSubmit={handleFormSubmit}>
                     <Box className={classes.nameContainer}>
                         <TextField
                             type="text"
@@ -60,7 +79,8 @@ const Register = () => {
                             label="First Name"
                             required
                             margin="dense"
-                            
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                         />
                         <TextField
                             type="text"
@@ -68,7 +88,8 @@ const Register = () => {
                             label="Last Name"
                             required
                             margin="dense"
-                            
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
                         />
                     </Box>
                     <TextField
@@ -78,6 +99,8 @@ const Register = () => {
                         required
                         margin="dense"
                         fullWidth
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <TextField
                         type="password"
@@ -86,6 +109,8 @@ const Register = () => {
                         required
                         margin="dense"
                         fullWidth
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <Button
                         className={classes.btn}
@@ -103,12 +128,6 @@ const Register = () => {
                 <Box>
                     <IconButton size="large">
                         <GoogleIcon fontSize="large" />
-                    </IconButton>
-                    <IconButton size="large">
-                        <GitHubIcon fontSize="large" />
-                    </IconButton>
-                    <IconButton size="large">
-                        <FacebookIcon fontSize="large" />
                     </IconButton>
                 </Box>
             </Paper>
