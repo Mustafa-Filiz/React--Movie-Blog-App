@@ -1,34 +1,60 @@
-import { Card, CardHeader, CardMedia } from '@mui/material';
-import React, { useContext } from 'react';
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardMedia,
+    Typography,
+} from '@mui/material';
+import React, { useContext, useState } from 'react';
 import { SearchContext } from '../contexts/SearchContext';
 import { makeStyles } from '@mui/styles';
+import { MovieRounded } from '@mui/icons-material';
 
-
-const IMG_URL = "https://image.tmdb.org/t/p/w1280"
+const IMG_URL = 'https://image.tmdb.org/t/p/w1280';
 
 const useStyles = makeStyles({
-    cardComp : {
-        height : 410,
-        width : 250,
-        backgroundColor : "primary"
+    cardComp: {
+        position: 'relative',
+        height: 410,
+        width: 250,
+        backgroundColor: 'primary',
     },
-})
+    overview: {
+        fontSize: 12,
+        position: 'absolute',
+        bottom: 60,
+        backgroundColor: 'white',
+    },
+});
 
 const MovieCard = ({ movie }) => {
     // const { movies } = useContext(SearchContext);
     // console.log(movie);
+    const [overview, setOverview] = useState(false);
 
     const classes = useStyles();
 
     return (
-        <Card className={classes.cardComp}>
+        <Card
+            className={classes.cardComp}
+            onMouseOver={() => setOverview(!overview)}
+            onMouseOut={() => setOverview(!overview)}
+            raised
+        >
             <CardMedia
                 component="img"
                 alt={movie.title}
                 height="350"
                 image={IMG_URL + movie.poster_path}
             />
-            <CardHeader title={movie.title} titleTypographyProps={{fontSize : 16, fontWeight: 600}} />
+            <Typography className={classes.overview} variant="p">
+                <Typography variant="h6">{overview && "Overview"}</Typography>
+                {overview && movie.overview}
+            </Typography>
+            <CardHeader
+                title={movie.title}
+                titleTypographyProps={{ fontSize: 16, fontWeight: 600 }}
+            />
         </Card>
     );
 };
