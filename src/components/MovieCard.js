@@ -25,8 +25,6 @@ const useStyles = makeStyles({
 });
 
 const MovieCard = ({ movie }) => {
-    // const { movies } = useContext(SearchContext);
-    // console.log(movie);
     const [overview, setOverview] = useState(false);
 
     const classes = useStyles();
