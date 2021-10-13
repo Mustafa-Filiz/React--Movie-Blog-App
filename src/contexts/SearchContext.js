@@ -30,11 +30,12 @@ function SearchContextProvider({ children }) {
     const handleSearch = (e) => {
         e.preventDefault();
 
-        if (searchTerm ) {
+        if (searchTerm && currentUser) {
             getMovies(SEARCH_URL + searchTerm);
             setSearchTerm('');
         } else {
             alert('Please login to search a movie.');
+            setSearchTerm('');
         }
     };
 
