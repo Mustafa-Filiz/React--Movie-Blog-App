@@ -1,6 +1,4 @@
 import GoogleIcon from '@mui/icons-material/Google';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import {
     Button,
     Container,
@@ -13,7 +11,7 @@ import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { createUser } from '../auth/Firebase';
+import { createUser, googleProvider } from '../auth/Firebase';
 
 const useStyles = makeStyles({
     loginPage: {
@@ -59,11 +57,13 @@ const Register = () => {
         const displayName = `${name} ${lastName}`.toUpperCase();
         createUser(email, password, displayName);
         history.push("/")
-        // setName('');
-        // setLastName('');
-        // setEmail('');
-        // setPassword('');
     };
+
+    const handleGoogleRegister = () => {
+        googleProvider();
+        history.push("/")
+    }
+
 
     return (
         <Container className={classes.loginPage}>
@@ -126,7 +126,7 @@ const Register = () => {
                     Register with
                 </Typography>
                 <Box>
-                    <IconButton size="large">
+                    <IconButton size="large" onClick={handleGoogleRegister}>
                         <GoogleIcon fontSize="large" />
                     </IconButton>
                 </Box>
