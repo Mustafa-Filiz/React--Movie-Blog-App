@@ -54,6 +54,7 @@ export const logIn = (email, password) => {
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            alert(errorMessage);
         });
 };
 
@@ -70,7 +71,10 @@ export const observer = (setCurrentUser) => {
     });
 };
 
-export const googleProvider = (provider) => {
+export const googleProvider = () => {
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+
     signInWithPopup(auth, provider)
         .then((result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
