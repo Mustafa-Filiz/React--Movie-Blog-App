@@ -1,6 +1,4 @@
 import GoogleIcon from '@mui/icons-material/Google';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import {
     Button,
     Container,
@@ -11,7 +9,9 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+import { googleProvider, logIn } from '../auth/Firebase';
 
 const useStyles = makeStyles({
     loginPage: {
@@ -40,6 +40,20 @@ const useStyles = makeStyles({
 
 const Login = () => {
     const classes = useStyles();
+    const history = useHistory();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleLogin = () => {
+        logIn(email, password);
+        history.push('/');
+    };
+
+    const handleGoogleLogin = () => {
+        googleProvider();
+        history.push('/');
+    };
 
     return (
         <Container className={classes.loginPage}>
@@ -47,7 +61,7 @@ const Login = () => {
                 <Typography variant="h2" mb={8}>
                     Login
                 </Typography>
-                <form>
+                <form onSubmit={handleLogin}>
                     <TextField
                         type="email"
                         variant="outlined"
@@ -55,6 +69,8 @@ const Login = () => {
                         required
                         margin="dense"
                         fullWidth
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <TextField
                         type="password"
@@ -63,6 +79,8 @@ const Login = () => {
                         required
                         margin="dense"
                         fullWidth
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <Button
                         className={classes.btn}
@@ -74,9 +92,11 @@ const Login = () => {
                         Login
                     </Button>
                 </form>
-                <Typography mt={3} variant="p">Login with</Typography>
+                <Typography mt={3} variant="p">
+                    Login with
+                </Typography>
                 <Box>
-                    <IconButton size="large">
+                    <IconButton size="large" onClick={handleGoogleLogin}>
                         <GoogleIcon fontSize="large" />
                     </IconButton>
                 </Box>
