@@ -14,6 +14,7 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { SearchContext } from '../contexts/SearchContext';
 import { AuthContext } from '../contexts/AuthContext';
+import { logOut } from '../auth/Firebase';
 
 const Search = styled('form')(({ theme }) => ({
     position: 'relative',
@@ -56,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar() {
-    const { movies, searchTerm, handleChange, handleSearch } =
+    const { searchTerm, handleChange, handleSearch } =
         useContext(SearchContext);
 
     const { currentUser } = useContext(AuthContext);
@@ -92,9 +93,7 @@ export default function NavBar() {
         >
             <MenuItem>
                 {currentUser ? (
-                    <Button color="inherit">
-                        {currentUser.displayName}
-                    </Button>
+                    <Button color="inherit">{currentUser.displayName}</Button>
                 ) : (
                     <Link
                         style={{ color: 'black', textDecoration: 'none' }}
@@ -110,7 +109,9 @@ export default function NavBar() {
                         style={{ color: 'black', textDecoration: 'none' }}
                         to="/"
                     >
-                        <Button color="inherit">Logout</Button>
+                        <Button color="inherit" onClick={() => logOut()}>
+                            Logout
+                        </Button>
                     </Link>
                 ) : (
                     <Link
@@ -128,19 +129,15 @@ export default function NavBar() {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
+                    <Link
+                        style={{ color: 'white', textDecoration: 'none' }}
+                        to="/"
                     >
-                        <Link
-                            style={{ color: 'white', textDecoration: 'none' }}
-                            to="/"
-                        >
-                            Movie Blog
-                        </Link>
-                    </Typography>
+                        <img
+                            src="https://fontmeme.com/permalink/211013/29e004cce047d4762da3555b4558a334.png"
+                            alt="logo"
+                        />
+                    </Link>
 
                     <Search onSubmit={handleSearch}>
                         <SearchIconWrapper>
@@ -178,7 +175,12 @@ export default function NavBar() {
                                 }}
                                 to="/"
                             >
-                                <Button color="inherit">Logout</Button>
+                                <Button
+                                    color="inherit"
+                                    onClick={() => logOut()}
+                                >
+                                    Logout
+                                </Button>
                             </Link>
                         ) : (
                             <Link
