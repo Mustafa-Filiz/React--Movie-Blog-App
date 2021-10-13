@@ -1,14 +1,11 @@
 import {
     Card,
-    CardContent,
     CardHeader,
     CardMedia,
     Typography,
 } from '@mui/material';
-import React, { useContext, useState } from 'react';
-import { SearchContext } from '../contexts/SearchContext';
+import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
-import { MovieRounded } from '@mui/icons-material';
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w1280';
 
