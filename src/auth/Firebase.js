@@ -15,12 +15,12 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: 'AIzaSyBrTCd9zipwDr9MUUDYH6WbpP3NuuOaDMo',
-    authDomain: 'react-movie-blog-app.firebaseapp.com',
-    projectId: 'react-movie-blog-app',
-    storageBucket: 'react-movie-blog-app.appspot.com',
-    messagingSenderId: '72152960298',
-    appId: '1:72152960298:web:cf78a5c14de8e544a96253',
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID
 };
 
 // Initialize Firebase
