@@ -1,3 +1,5 @@
+https://mfilix-movie-blog.netlify.app/
+
 Welcome to my Movie Blog App. I used TMDB API to fetch movies. You should login to search for a movie. I used Firebase Auth for authentication. Here is the keys you need in your .env file to run the app on our PC : <br/>
 REACT_APP_API_KEY= <br/>
 REACT_APP_AUTH_DOMAIN= <br/>
